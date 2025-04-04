@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>Forward Template Single File Project</title>
+    <meta name="description" content="" />
+    <meta name="keywords" content="" />
+
+    <!-- Fonts -->
+    <link href="https://fonts.googleapis.com" rel="preconnect" />
+    <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,300;1,400;1,500;1,600;1,700;1,800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Jost:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- Vendor CSS Files -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/css/bootstrap.min.css"
+      integrity="sha512-jnSuA4Ss2PkkikSOLtYs8BlYIeeIK1h99ty4YfvRPAlzr377vr3CXDb7sb7eEEBYjDtcYj+AjBH3FLv5uSJuXg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.11.3/font/bootstrap-icons.min.css"
+      integrity="sha512-dPXYcDub/aeb08c63jRq/k6GaKccl256JQy/AnOq7CAnEZ9FzSL9wSbcZkMp4R26vBsMLFYH4kQ67/bbV8XaCQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css"
+      integrity="sha512-1cK78a1o+ht2JcaW6g8OXYwqpev9+6GqOkz9xmBN9iUUhIndKtxwILGWYOSibOKjLsEdjyjZvYDq/cZwNeak0w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.1/css/glightbox.min.css"
+      integrity="sha512-T+KoG3fbDoSnlgEXFQqwcTC9AdkFIxhBlmoaFqYaIjq2ShhNwNao9AKaLUPMfwiBPL0ScxAtc+UYbHAgvd+sjQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.css"
+      integrity="sha512-rd0qOHVMOcez6pLWPVFIv7EfSdGKLt+eafXh4RO/12Fgr41hDQxfGvoi1Vy55QIVcQEujUE1LQrATCLl2Fs+ag=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+
+    <script>
+      let subdomain = "";
+      window.addEventListener("message", (event) => {
+        // Verify the parent's origin for security
+        window.parent.postMessage(event.origin, "*");
+
+        if (event.data.type === "urlData") {
+          subdomain = event.data.payload;
+          window.parent.postMessage("Received:" + event.data.payload, "*");
+        }
+      });
+    </script>
+
+    <!-- Main CSS File -->
+    <style>
+      /*--------------------------------------------------------------
+        # Font & Color Variables
+        # Help: https://bootstrapmade.com/color-system/
+        --------------------------------------------------------------*/
+      /* Fonts */
+      :root {
+        --default-font: "Open Sans", system-ui, -apple-system, "Segoe UI",
+          Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans",
+          sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
+          "Noto Color Emoji";
+        --heading-font: "Jost", sans-serif;
+        --nav-font: "Poppins", sans-serif;
+      }
+
+      /* Global Colors - The following color variables are used throughout the website. Updating them here will change the color scheme of the entire website */
+      :root {
+        --background-color: #ffffff; /* Background color for the entire website, including individual sections */
+        --default-color: #444444; /* Default color used for the majority of the text content across the entire website */
+        --heading-color: #37517e; /* Color for headings, subheadings and title throughout the website */
+        --accent-color: #47b2e4; /* Accent color that represents your brand on the website. It's used for buttons, links, and other elements that need to stand out */
+        --surface-color: #ffffff; /* The surface color is used as a background of boxed elements within sections, such as cards, icon boxes, or other elements that require a visual separation from the global background. */
+        --contrast-color: #ffffff; /* Contrast color for text, ensuring readability against backgrounds of accent, heading, or default colors. */
+      }
+
+      /* Nav Menu Colors - The following color variables are used specifically for the navigation menu. They are separate from the global colors to allow for more customization options */
+      :root {
+        --nav-color: #ffffff; /* The default color of the main navmenu links */
+        --nav-hover-color: #47b2e4; /* Applied to main navmenu links when they are hovered over or active */
+        --nav-mobile-background-color: #ffffff; /* Used as the background color for mobile navigation menu */
+      }
+
+      /* Color Presets - These classes override global colors when applied to any section or element, providing reuse of the sam color scheme. */
+
+      .light-background {
+        --background-color: #f5f6f8;
+        --surface-color: #ffffff;
+      }
+
+      .dark-background {
+        --background-color: #37517e;
+        --default-color: #ffffff;
+        --heading-color: #ffffff;
+        --surface-color: #4668a2;
+        --contrast-color: #ffffff;
+      }
+
+      /* Smooth scroll */
+      :root {
+        scroll-behavior: smooth;
+      }
+
+      /*--------------------------------------------------------------
+        # General Styling & Shared Classes
+        --------------------------------------------------------------*/
+      body {
+        color: var(--default-color);
+        background-color: var(--background-color);
+        font-family: var(--default-font);
+      }
+
+      a {
+        color: var(--accent-color);
+        text-decoration: none;
+        transition: 0.3s;
+      }
+
+      a:hover {
+        color: color-mix(in srgb, var(--accent-color), transparent 25%);
+        text-decoration: none;
+      }
+
+      h1,
+      h2,
+      h3,
+      h4,
+      h5,
+      h6 {
+        color: var(--heading-color);
+        font-family: var(--heading-font);
+      }
+
+      /*--------------------------------------------------------------
+        # Global Header
+        --------------------------------------------------------------*/
+      .header {
+        --background-color: #3d4d6a;
+        --heading-color: #ffffff;
+        color: var(--default-color);
+        background-color: var(--background-color);
+        padding: 15px 0;
+        transition: all 0.5s;
+        z-index: 997;
+      }
+
+      .header .logo {
+        line-height: 1;
+      }
+
+      .header .logo img {
+        max-height: 36px;
+        margin-right: 8px;
+      }
+
+      .header .logo h1 {
+        font-size: 30px;
+        margin: 0;
+        font-weight: 500;
+        color: var(--heading-color);
+        letter-spacing: 2px;
+        text-transform: uppercase;
+      }
+
+      .header .btn-getstarted,
+      .header .btn-getstarted:focus {
+        color: var(--contrast-color);
+        background: var(--accent-color);
+        font-size: 14px;
+        padding: 8px 25px;
+        margin: 0 0 0 30px;
+        border-radius: 50px;
+        transition: 0.3s;
+      }
+
+      .header .btn-getstarted:hover,
+      .header .btn-getstarted:focus:hover {
+        color: var(--contrast-color);
+        background: color-mix(in srgb, var(--accent-color), transparent 15%);
+      }
+
+      @media (max-width: 1200px) {
+        .header .logo {
+          order: 1;
+        }
+
+        .header .btn-getstarted {
+          order: 2;
+          margin: 0 15px 0 0;
+          padding: 6px 15px;
+        }
+
+        .header .navmenu {
+          order: 3;
+        }
+      }
+
+      /* Index Page Header
+        ------------------------------*/
+      .index-page .header {
+        --background-color: rgba(255, 255, 255, 0);
+        --heading-color: #ffffff;
+        --nav-color: #ffffff;
+      }
+
+      /* Index Page Header on Scroll
+        ------------------------------*/
+      .index-page.scrolled .header {
+        --background-color: rgba(40, 58, 90, 0.9);
+      }
+
+      /*--------------------------------------------------------------
+        # Navigation Menu
+        --------------------------------------------------------------*/
+      /* Desktop Navigation */
+      @media (min-width: 1200px) {
+        .navmenu {
+          padding: 0;
+        }
+
+        .navmenu ul {
+          margin: 0;
+          padding: 0;
+          display: flex;
+          list-style: none;
+          align-items: center;
+        }
+
+        .navmenu li {
+          position: relative;
+        }
+
+        .navmenu a,
+        .navmenu a:focus {
+          color: var(--nav-color);
+          padding: 18px 15px;
+          font-size: 15px;
+          font-family: var(--nav-font);
+          font-weight: 400;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          white-space: nowrap;
+          transition: 0.3s;
+        }
+
+        .navmenu a i,
+        .navmenu a:focus i {
+          font-size: 12px;
+          line-height: 0;
+          margin-left: 5px;
+          transition: 0.3s;
+        }
+
+        .navmenu li:last-child a {
+          padding-right: 0;
+        }
+
+        .navmenu li:hover > a,
+        .navmenu .active,
+        .navmenu .active:focus {
+          color: var(--nav-hover-color);
+        }
+
+        .navmenu .dd-box-shadow {
+          box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+        }
+      }
+
+      /* Mobile Navigation */
+      @media (max-width: 1199px) {
+        .mobile-nav-toggle {
+          color: var(--nav-color);
+          font-size: 28px;
+          line-height: 0;
+          margin-right: 10px;
+          cursor: pointer;
+          transition: color 0.3s;
+        }
+
+        .navmenu {
+          padding: 0;
+          z-index: 9997;
+        }
+
+        .navmenu ul {
+          display: none;
+          list-style: none;
+          position: absolute;
+          inset: 60px 20px 20px 20px;
+          padding: 10px 0;
+          margin: 0;
+          border-radius: 6px;
+          background-color: var(--nav-mobile-background-color);
+          overflow-y: auto;
+          transition: 0.3s;
+          z-index: 9998;
+          box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .navmenu a,
+        .navmenu a:focus {
+          color: var(--nav-dropdown-color);
+          padding: 10px 20px;
+          font-family: var(--nav-font);
+          font-size: 17px;
+          font-weight: 500;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          white-space: nowrap;
+          transition: 0.3s;
+        }
+
+        .navmenu a i,
+        .navmenu a:focus i {
+          font-size: 12px;
+          line-height: 0;
+          margin-left: 5px;
+          width: 30px;
+          height: 30px;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          border-radius: 50%;
+          transition: 0.3s;
+          background-color: color-mix(
+            in srgb,
+            var(--accent-color),
+            transparent 90%
+          );
+        }
+
+        .navmenu a i:hover,
+        .navmenu a:focus i:hover {
+          background-color: var(--accent-color);
+          color: var(--contrast-color);
+        }
+
+        .navmenu a:hover,
+        .navmenu .active,
+        .navmenu .active:focus {
+          color: var(--nav-dropdown-hover-color);
+        }
+
+        .navmenu .active i,
+        .navmenu .active:focus i {
+          background-color: var(--accent-color);
+          color: var(--contrast-color);
+          transform: rotate(180deg);
+        }
+
+        .mobile-nav-active {
+          overflow: hidden;
+        }
+
+        .mobile-nav-active .mobile-nav-toggle {
+          color: #fff;
+          position: absolute;
+          font-size: 32px;
+          top: 15px;
+          right: 15px;
+          margin-right: 0;
+          z-index: 9999;
+        }
+
+        .mobile-nav-active .navmenu {
+          position: fixed;
+          overflow: hidden;
+          inset: 0;
+          background: rgba(33, 37, 41, 0.8);
+          transition: 0.3s;
+        }
+
+        .mobile-nav-active .navmenu > ul {
+          display: block;
+        }
+      }
+
+      /*--------------------------------------------------------------
+        # Global Footer
+        --------------------------------------------------------------*/
+      .footer {
+        color: var(--default-color);
+        background-color: var(--background-color);
+        font-size: 14px;
+        padding-bottom: 50px;
+        position: relative;
+      }
+
+      .footer .footer-top {
+        padding-top: 50px;
+      }
+
+      .footer .social-links a {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 1px solid
+          color-mix(in srgb, var(--default-color), transparent 50%);
+        font-size: 16px;
+        color: color-mix(in srgb, var(--default-color), transparent 20%);
+        margin-right: 10px;
+        transition: 0.3s;
+      }
+
+      .footer .social-links a:hover {
+        color: var(--accent-color);
+        border-color: var(--accent-color);
+      }
+
+      .footer h4 {
+        font-size: 16px;
+        font-weight: bold;
+        position: relative;
+        padding-bottom: 12px;
+      }
+
+      .footer .footer-links {
+        margin-bottom: 30px;
+      }
+
+      .footer .footer-links ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .footer .footer-links ul i {
+        margin-right: 3px;
+        font-size: 12px;
+        line-height: 0;
+        color: var(--accent-color);
+      }
+
+      .footer .footer-links ul li {
+        padding: 10px 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .footer .footer-links ul li:first-child {
+        padding-top: 0;
+      }
+
+      .footer .footer-links ul a {
+        display: inline-block;
+        color: color-mix(in srgb, var(--default-color), transparent 20%);
+        line-height: 1;
+      }
+
+      .footer .footer-links ul a:hover {
+        color: var(--accent-color);
+      }
+
+      .footer .footer-about a {
+        color: var(--heading-color);
+        font-size: 28px;
+        font-weight: 600;
+        text-transform: uppercase;
+        font-family: var(--heading-font);
+      }
+
+      .footer .footer-contact p {
+        margin-bottom: 5px;
+      }
+
+      .footer .copyright {
+        padding-top: 25px;
+        padding-bottom: 25px;
+        border-top: 1px solid
+          color-mix(in srgb, var(--default-color), transparent 90%);
+      }
+
+      .footer .copyright p {
+        margin-bottom: 0;
+      }
+
+      /*--------------------------------------------------------------
+        # Preloader
+        --------------------------------------------------------------*/
+      #preloader {
+        position: fixed;
+        inset: 0;
+        z-index: 999999;
+        overflow: hidden;
+        background: var(--background-color);
+        transition: all 0.6s ease-out;
+      }
+
+      #preloader:before {
+        content: "";
+        position: fixed;
+        top: calc(50% - 30px);
+        left: calc(50% - 30px);
+        border: 6px solid #ffffff;
+        border-color: var(--accent-color) transparent var(--accent-color)
+          transparent;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        animation: animate-preloader 1.5s linear infinite;
+      }
+
+      @keyframes animate-preloader {
+        0% {
+          transform: rotate(0deg);
+        }
+
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      /*--------------------------------------------------------------
+        # Scroll Top Button
+        --------------------------------------------------------------*/
+      .scroll-top {
+        position: fixed;
+        visibility: hidden;
+        opacity: 0;
+        right: 15px;
+        bottom: -15px;
+        z-index: 99999;
+        background-color: var(--accent-color);
+        width: 44px;
+        height: 44px;
+        border-radius: 50px;
+        transition: all 0.4s;
+      }
+
+      .scroll-top i {
+        font-size: 24px;
+        color: var(--contrast-color);
+        line-height: 0;
+      }
+
+      .scroll-top:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--accent-color),
+          transparent 20%
+        );
+        color: var(--contrast-color);
+      }
+
+      .scroll-top.active {
+        visibility: visible;
+        opacity: 1;
+        bottom: 15px;
+      }
+
+      /*--------------------------------------------------------------
+        # Disable aos animation delay on mobile devices
+        --------------------------------------------------------------*/
+      @media screen and (max-width: 768px) {
+        [data-aos-delay] {
+          transition-delay: 0 !important;
+        }
+      }
+
+      /*--------------------------------------------------------------
+        # Global Page Titles & Breadcrumbs
+        --------------------------------------------------------------*/
+      .page-title {
+        --background-color: color-mix(
+          in srgb,
+          var(--default-color),
+          transparent 96%
+        );
+        color: var(--default-color);
+        background-color: var(--background-color);
+        padding: 20px 0;
+        position: relative;
+      }
+
+      .page-title h1 {
+        font-size: 28px;
+        font-weight: 700;
+        margin: 0;
+      }
+
+      /*--------------------------------------------------------------
+        # Global Sections
+        --------------------------------------------------------------*/
+      section,
+      .section {
+        color: var(--default-color);
+        background-color: var(--background-color);
+        padding: 60px 0;
+        scroll-margin-top: 88px;
+        overflow: clip;
+      }
+
+      @media (max-width: 1199px) {
+        section,
+        .section {
+          scroll-margin-top: 66px;
+        }
+      }
+
+      /*--------------------------------------------------------------
+        # Global Section Titles
+        --------------------------------------------------------------*/
+      .section-title {
+        text-align: center;
+        padding-bottom: 60px;
+        position: relative;
+      }
+
+      .section-title h2 {
+        font-size: 32px;
+        font-weight: 700;
+        margin-bottom: 20px;
+        padding-bottom: 20px;
+        text-transform: uppercase;
+        position: relative;
+      }
+
+      .section-title h2:before {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 160px;
+        height: 1px;
+        background: color-mix(in srgb, var(--default-color), transparent 60%);
+        left: 0;
+        right: 0;
+        bottom: 1px;
+        margin: auto;
+      }
+
+      .section-title h2::after {
+        content: "";
+        position: absolute;
+        display: block;
+        width: 60px;
+        height: 3px;
+        background: var(--accent-color);
+        left: 0;
+        right: 0;
+        bottom: 0;
+        margin: auto;
+      }
+
+      .section-title p {
+        margin-bottom: 0;
+      }
+
+      /*--------------------------------------------------------------
+        # Hero Section
+        --------------------------------------------------------------*/
+      .hero {
+        width: 100%;
+        min-height: 80vh;
+        position: relative;
+        padding: 120px 0 60px 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .hero h1 {
+        margin: 0;
+        font-size: 48px;
+        font-weight: 700;
+        line-height: 56px;
+      }
+
+      .hero p {
+        color: color-mix(in srgb, var(--default-color), transparent 30%);
+        margin: 5px 0 30px 0;
+        font-size: 22px;
+        line-height: 1.3;
+        font-weight: 600;
+      }
+
+      .hero .btn-get-started {
+        color: var(--contrast-color);
+        background: var(--accent-color);
+        font-family: var(--heading-font);
+        font-weight: 500;
+        font-size: 15px;
+        letter-spacing: 1px;
+        display: inline-block;
+        padding: 10px 28px 12px 28px;
+        border-radius: 50px;
+        transition: 0.5s;
+      }
+
+      .hero .btn-get-started:hover {
+        color: var(--contrast-color);
+        background: color-mix(in srgb, var(--accent-color), transparent 15%);
+      }
+
+      .hero .btn-watch-video {
+        font-size: 16px;
+        transition: 0.5s;
+        margin-left: 25px;
+        color: var(--default-color);
+        font-weight: 600;
+      }
+
+      .hero .btn-watch-video i {
+        color: var(--contrast-color);
+        font-size: 32px;
+        transition: 0.3s;
+        line-height: 0;
+        margin-right: 8px;
+      }
+
+      .hero .btn-watch-video:hover {
+        color: var(--accent-color);
+      }
+
+      .hero .btn-watch-video:hover i {
+        color: color-mix(in srgb, var(--accent-color), transparent 15%);
+      }
+
+      .hero .animated {
+        animation: up-down 2s ease-in-out infinite alternate-reverse both;
+      }
+
+      @media (max-width: 640px) {
+        .hero h1 {
+          font-size: 28px;
+          line-height: 36px;
+        }
+
+        .hero p {
+          font-size: 18px;
+          line-height: 24px;
+          margin-bottom: 30px;
+        }
+
+        .hero .btn-get-started,
+        .hero .btn-watch-video {
+          font-size: 13px;
+        }
+      }
+
+      @keyframes up-down {
+        0% {
+          transform: translateY(10px);
+        }
+
+        100% {
+          transform: translateY(-10px);
+        }
+      }
+
+      /*--------------------------------------------------------------
+        # About Section
+        --------------------------------------------------------------*/
+      .about ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .about ul li {
+        padding-bottom: 5px;
+        display: flex;
+        align-items: center;
+      }
+
+      .about ul i {
+        font-size: 20px;
+        padding-right: 4px;
+        color: var(--accent-color);
+      }
+
+      .about .read-more {
+        color: var(--accent-color);
+        font-family: var(--heading-font);
+        font-weight: 500;
+        font-size: 16px;
+        letter-spacing: 1px;
+        padding: 8px 28px;
+        border-radius: 5px;
+        transition: 0.3s;
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        border: 2px solid var(--accent-color);
+      }
+
+      .about .read-more i {
+        font-size: 18px;
+        margin-left: 5px;
+        line-height: 0;
+        transition: 0.3s;
+      }
+
+      .about .read-more:hover {
+        background: var(--accent-color);
+        color: var(--contrast-color);
+      }
+
+      .about .read-more:hover i {
+        transform: translate(5px, 0);
+      }
+
+      /*--------------------------------------------------------------
+        # Services Section
+        --------------------------------------------------------------*/
+      .services .service-item {
+        background-color: var(--surface-color);
+        box-shadow: 0px 5px 90px 0px rgba(0, 0, 0, 0.1);
+        padding: 50px 30px;
+        transition: all ease-in-out 0.4s;
+        height: 100%;
+      }
+
+      .services .service-item .icon {
+        margin-bottom: 10px;
+      }
+
+      .services .service-item .icon i {
+        color: var(--accent-color);
+        font-size: 36px;
+        transition: 0.3s;
+      }
+
+      .services .service-item h4 {
+        font-weight: 700;
+        margin-bottom: 15px;
+        font-size: 20px;
+      }
+
+      .services .service-item h4 a {
+        color: var(--heading-color);
+        transition: ease-in-out 0.3s;
+      }
+
+      .services .service-item p {
+        line-height: 24px;
+        font-size: 14px;
+        margin-bottom: 0;
+      }
+
+      .services .service-item:hover {
+        transform: translateY(-10px);
+      }
+
+      .services .service-item:hover h4 a {
+        color: var(--accent-color);
+      }
+
+      /*--------------------------------------------------------------
+        # Service Details Section
+        --------------------------------------------------------------*/
+      .service-details .services-list {
+        background-color: var(--surface-color);
+        padding: 10px 30px;
+        border: 1px solid
+          color-mix(in srgb, var(--default-color), transparent 90%);
+        margin-bottom: 20px;
+      }
+
+      .service-details .services-list a {
+        display: block;
+        line-height: 1;
+        padding: 8px 0 8px 15px;
+        border-left: 3px solid
+          color-mix(in srgb, var(--default-color), transparent 70%);
+        margin: 20px 0;
+        color: color-mix(in srgb, var(--default-color), transparent 20%);
+        transition: 0.3s;
+      }
+
+      .service-details .services-list a.active {
+        color: var(--heading-color);
+        font-weight: 700;
+        border-color: var(--accent-color);
+      }
+
+      .service-details .services-list a:hover {
+        border-color: var(--accent-color);
+      }
+
+      .service-details .services-img {
+        margin-bottom: 20px;
+      }
+
+      .service-details h3 {
+        font-size: 26px;
+        font-weight: 700;
+      }
+
+      .service-details h4 {
+        font-size: 20px;
+        font-weight: 700;
+      }
+
+      .service-details p {
+        font-size: 15px;
+      }
+
+      .service-details ul {
+        list-style: none;
+        padding: 0;
+        font-size: 15px;
+      }
+
+      .service-details ul li {
+        padding: 5px 0;
+        display: flex;
+        align-items: center;
+      }
+
+      .service-details ul i {
+        font-size: 20px;
+        margin-right: 8px;
+        color: var(--accent-color);
+      }
+
+      /*--------------------------------------------------------------
+        # Pagination 2 Section
+        --------------------------------------------------------------*/
+      .pagination-2 {
+        padding-top: 0;
+        color: color-mix(in srgb, var(--default-color), transparent 40%);
+      }
+
+      .pagination-2 ul {
+        display: flex;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+      }
+
+      .pagination-2 li {
+        margin: 0 5px;
+        transition: 0.3s;
+      }
+
+      .pagination-2 li a {
+        color: color-mix(in srgb, var(--default-color), transparent 40%);
+        padding: 7px 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      .pagination-2 li a.active,
+      .pagination-2 li a:hover {
+        background: var(--accent-color);
+        color: var(--contrast-color);
+      }
+
+      .pagination-2 li a.active a,
+      .pagination-2 li a:hover a {
+        color: var(--contrast-color);
+      }
+
+      /*--------------------------------------------------------------
+        # Error 404 Section
+        --------------------------------------------------------------*/
+      .error-404 {
+        padding: 80px 0;
+        margin: 0 auto;
+      }
+
+      .error-404 .error-icon {
+        font-size: 5rem;
+        color: color-mix(in srgb, var(--accent-color), transparent 15%);
+      }
+
+      .error-404 .error-code {
+        font-size: clamp(6rem, 15vw, 12rem);
+        font-weight: 800;
+        color: color-mix(in srgb, var(--heading-color), transparent 10%);
+        font-family: var(--heading-font);
+        line-height: 1;
+      }
+
+      .error-404 .error-title {
+        font-size: 2rem;
+        color: var(--heading-color);
+        font-weight: 600;
+      }
+
+      .error-404 .error-text {
+        font-size: 1.1rem;
+        color: color-mix(in srgb, var(--default-color), transparent 20%);
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .error-404 .search-box {
+        max-width: 500px;
+        margin: 0 auto;
+      }
+
+      .error-404 .search-box .input-group {
+        border-radius: 50px;
+        overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+      }
+
+      .error-404 .search-box .form-control {
+        border: 1px solid
+          color-mix(in srgb, var(--default-color), transparent 90%);
+        padding: 0.75rem 1.5rem;
+        font-size: 1rem;
+        color: var(--default-color);
+        background-color: var(--surface-color);
+        border-radius: 50px;
+      }
+
+      .error-404 .search-box .form-control:focus {
+        box-shadow: none;
+        border-color: var(--accent-color);
+      }
+
+      .error-404 .search-box .form-control::placeholder {
+        color: color-mix(in srgb, var(--default-color), transparent 60%);
+      }
+
+      .error-404 .search-box .search-btn {
+        background-color: var(--accent-color);
+        color: var(--contrast-color);
+        border: none;
+        padding: 0.75rem 1.5rem;
+        transition: all 0.3s ease;
+      }
+
+      .error-404 .search-box .search-btn:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--accent-color),
+          transparent 15%
+        );
+      }
+
+      .error-404 .error-action .btn-primary {
+        padding: 0.75rem 2rem;
+        font-size: 1.1rem;
+        background-color: var(--accent-color);
+        border: none;
+        color: var(--contrast-color);
+        border-radius: 50px;
+        transition: all 0.3s ease;
+      }
+
+      .error-404 .error-action .btn-primary:hover {
+        background-color: color-mix(
+          in srgb,
+          var(--accent-color),
+          transparent 15%
+        );
+        transform: translateY(-2px);
+      }
+
+      @media (max-width: 768px) {
+        .error-404 {
+          padding: 60px 0;
+        }
+
+        .error-404 .error-code {
+          font-size: clamp(4rem, 12vw, 8rem);
+        }
+
+        .error-404 .error-title {
+          font-size: 1.5rem;
+        }
+
+        .error-404 .error-text {
+          font-size: 1rem;
+          padding: 0 20px;
+        }
+
+        .error-404 .search-box {
+          margin: 0 20px;
+        }
+      }
+
+      /*--------------------------------------------------------------
+        # Widgets
+        --------------------------------------------------------------*/
+      .widgets-container {
+        margin: 60px 0 30px 0;
+      }
+
+      .widget-title {
+        color: var(--heading-color);
+        font-size: 20px;
+        font-weight: 600;
+        padding: 0 0 0 10px;
+        margin: 0 0 20px 0;
+        border-left: 4px solid var(--accent-color);
+      }
+
+      .widget-item {
+        margin-bottom: 30px;
+        background-color: color-mix(
+          in srgb,
+          var(--default-color),
+          transparent 98%
+        );
+        border: 1px solid
+          color-mix(in srgb, var(--default-color), transparent 90%);
+        padding: 30px;
+        border-radius: 5px;
+      }
+
+      .widget-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .search-widget form {
+        background: var(--background-color);
+        border: 1px solid
+          color-mix(in srgb, var(--default-color), transparent 75%);
+        padding: 3px 10px;
+        position: relative;
+        border-radius: 50px;
+        transition: 0.3s;
+      }
+
+      .search-widget form input[type="text"] {
+        border: 0;
+        padding: 4px 10px;
+        border-radius: 4px;
+        width: calc(100% - 40px);
+        background-color: var(--background-color);
+        color: var(--default-color);
+      }
+
+      .search-widget form input[type="text"]:focus {
+        outline: none;
+      }
+
+      .search-widget form button {
+        background: none;
+        color: var(--default-color);
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        border: 0;
+        font-size: 16px;
+        padding: 0 16px;
+        transition: 0.3s;
+        line-height: 0;
+      }
+
+      .search-widget form button i {
+        line-height: 0;
+      }
+
+      .search-widget form button:hover {
+        color: var(--accent-color);
+      }
+
+      .search-widget form:is(:focus-within) {
+        border-color: var(--accent-color);
+      }
+
+      .recent-posts-widget .post-item {
+        display: flex;
+        margin-bottom: 15px;
+      }
+
+      .recent-posts-widget .post-item:last-child {
+        margin-bottom: 0;
+      }
+
+      .recent-posts-widget .post-item img {
+        width: 80px;
+        margin-right: 15px;
+      }
+
+      .recent-posts-widget .post-item h4 {
+        font-size: 15px;
+        font-weight: bold;
+        margin-bottom: 5px;
+      }
+
+      .recent-posts-widget .post-item h4 a {
+        color: var(--default-color);
+        transition: 0.3s;
+      }
+
+      .recent-posts-widget .post-item h4 a:hover {
+        color: var(--accent-color);
+      }
+
+      .recent-posts-widget .post-item time {
+        display: block;
+        font-style: italic;
+        font-size: 14px;
+        color: color-mix(in srgb, var(--default-color), transparent 50%);
+      }
+
+      .categories-widget ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .categories-widget ul li {
+        padding-bottom: 10px;
+      }
+
+      .categories-widget ul li:last-child {
+        padding-bottom: 0;
+      }
+
+      .categories-widget ul a {
+        color: color-mix(in srgb, var(--default-color), transparent 20%);
+        transition: 0.3s;
+      }
+
+      .categories-widget ul a:hover {
+        color: var(--accent-color);
+      }
+
+      .categories-widget ul a span {
+        padding-left: 5px;
+        color: color-mix(in srgb, var(--default-color), transparent 50%);
+        font-size: 14px;
+      }
+
+      .tags-widget ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      .tags-widget ul li {
+        display: inline-block;
+      }
+
+      .tags-widget ul a {
+        background-color: color-mix(
+          in srgb,
+          var(--default-color),
+          transparent 94%
+        );
+        color: color-mix(in srgb, var(--default-color), transparent 30%);
+        border-radius: 50px;
+        font-size: 14px;
+        padding: 5px 15px;
+        margin: 0 6px 8px 0;
+        display: inline-block;
+        transition: 0.3s;
+      }
+
+      .tags-widget ul a:hover {
+        background: var(--accent-color);
+        color: var(--contrast-color);
+      }
+
+      .tags-widget ul a span {
+        padding-left: 5px;
+        color: color-mix(in srgb, var(--default-color), transparent 60%);
+        font-size: 14px;
+      }
+    </style>
+  </head>
+
+  <body class="index-page">
+    <header id="header" class="header d-flex align-items-center fixed-top">
+      <div
+        class="container-fluid container-xl position-relative d-flex align-items-center"
+      >
+        <a href="index.html" class="logo d-flex align-items-center me-auto">
+          <!-- Uncomment the line below if you also wish to use an image logo -->
+          <!-- <img src="assets/img/logo.webp" alt=""> -->
+          <h1 class="sitename">Forward Protocol</h1>
+        </a>
+
+        <nav id="navmenu" class="navmenu">
+          <ul>
+            <li><a href="#hero" class="active">Home</a></li>
+            <li><a href="#about">About</a></li>
+            <li><a href="#services">Services</a></li>
+          </ul>
+          <i class="mobile-nav-toggle d-xl-none bi bi-list"></i>
+        </nav>
+
+        <a class="btn-getstarted" href="#services">Get Started</a>
+      </div>
+    </header>
+
+    <main class="main">
+      <!-- Hero Section -->
+      <section id="hero" class="hero section dark-background">
+        <div class="container">
+          <div class="row gy-4">
+            <div
+              class="col-lg-6 order-2 order-lg-1 d-flex flex-column justify-content-center"
+              data-aos="zoom-out"
+            >
+              <h1>Better Solutions For Your Business</h1>
+              <p>
+                We offer a range of essential services for our ERC20 Token,
+                which we have deployed via Forward Protocol.
+              </p>
+              <div class="d-flex">
+                <a href="#services" class="btn-get-started">Go to Services</a>
+                <a
+                  href="https://www.youtube.com"
+                  class="glightbox btn-watch-video d-flex align-items-center"
+                  ><i class="bi bi-play-circle"></i><span>Watch Video</span></a
+                >
+              </div>
+            </div>
+            <div
+              class="col-lg-6 order-1 order-lg-2 hero-img"
+              data-aos="zoom-out"
+              data-aos-delay="200"
+            >
+              <img
+                src="assets/img/hero-img.png"
+                class="img-fluid animated"
+                alt=""
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- /Hero Section -->
+
+      <!-- Services Section -->
+      <section id="services" class="services section light-background">
+        <!-- Section Title -->
+        <div class="container section-title" data-aos="fade-up">
+          <h2>Services</h2>
+          <p>You can explore our services by clicking on the services below.</p>
+        </div>
+        <!-- End Section Title -->
+
+        <div class="container">
+          <div class="row gy-4">
+            <div
+              class="col-xl-3 col-md-6 d-flex"
+              data-aos="fade-up"
+              data-aos-delay="100"
+              id="btn-token-name"
+              onclick="onRead(8, 'token-name')"
+            >
+              <div class="service-item position-relative">
+                <div class="icon"><i class="bi bi-activity icon"></i></div>
+                <h4>
+                  <a href="#" onclick="return false;" class="stretched-link"
+                    >Get Token Name</a
+                  >
+                </h4>
+                <p id="token-name">Token name will be displayed here</p>
+              </div>
+            </div>
+            <!-- End Service Item -->
+
+            <div
+              class="col-xl-3 col-md-6 d-flex"
+              data-aos="fade-up"
+              data-aos-delay="200"
+              id="btn-token-symbol"
+              onclick="onRead(9, 'token-symbol')"
+            >
+              <div class="service-item position-relative">
+                <div class="icon">
+                  <i class="bi bi-bounding-box-circles icon"></i>
+                </div>
+                <h4>
+                  <a href="#" onclick="return false;" class="stretched-link"
+                    >Get Token Symbol</a
+                  >
+                </h4>
+                <p id="token-symbol">Token symbol will be displayed here</p>
+              </div>
+            </div>
+            <!-- End Service Item -->
+
+            <div
+              class="col-xl-3 col-md-6 d-flex"
+              data-aos="fade-up"
+              data-aos-delay="300"
+              id="btn-token-decimal"
+            >
+              <div class="row w-100">
+                <div class="row-xl-11 row-md-11">
+                  <div
+                    class="service-item position-relative"
+                    onclick="onWrite(7, 'mint-token-tx', 'token-mint-amount')"
+                  >
+                    <div class="icon">
+                      <i class="bi bi-calendar4-week icon"></i>
+                    </div>
+                    <h4>
+                      <a href="#" onclick="return false;" class="stretched-link"
+                        >Mint Tokens</a
+                      >
+                    </h4>
+                    <p id="mint-token-tx">
+                      Token mint transaction hash will be displayed here
+                    </p>
+                  </div>
+                </div>
+                <div class="row-xl-1 row-md-1">
+                  <input
+                    class="w-100 form-control mt-3"
+                    type="text"
+                    placeholder="Token amount to mint"
+                    id="token-mint-amount"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- End Service Item -->
+
+            <div
+              class="col-xl-3 col-md-6 d-flex"
+              data-aos="fade-up"
+              data-aos-delay="300"
+              id="btn-token-total-supply"
+            >
+              <div class="row w-100">
+                <div
+                  class="row-xl-10 row-md-10"
+                  onclick="onWrite(11, 'transfer-token-tx', 'receiver-address', 'token-send-amount')"
+                >
+                  <div class="service-item position-relative">
+                    <div class="icon">
+                      <i class="bi bi-calendar4-week icon"></i>
+                    </div>
+                    <h4>
+                      <a href="#" onclick="return false;" class="stretched-link"
+                        >Transfer Token</a
+                      >
+                    </h4>
+                    <p id="transfer-token-tx">
+                      Token transfer transaction hash will be displayed here
+                    </p>
+                  </div>
+                </div>
+                <div class="row-xl-1 row-md-1">
+                  <input
+                    class="w-100 form-control mt-3"
+                    type="text"
+                    placeholder="Receiver address"
+                    id="receiver-address"
+                  />
+                </div>
+                <div class="row-xl-1 row-md-1">
+                  <input
+                    class="w-100 form-control mt-3"
+                    type="text"
+                    placeholder="Token amount to send"
+                    id="token-send-amount"
+                  />
+                </div>
+              </div>
+            </div>
+            <!-- End Service Item -->
+          </div>
+        </div>
+      </section>
+      <!-- /Services Section -->
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="container footer-top">
+        <div class="row gy-4">
+          <div class="col-lg-4 col-md-6 footer-about">
+            <a href="index.html" class="d-flex align-items-center">
+              <span class="sitename">Forward Protocol</span>
+            </a>
+            <div class="footer-contact pt-3">
+              <p>Street</p>
+              <p>City</p>
+              <p class="mt-3">
+                <strong>Phone:</strong> <span>+1 234 456 7890</span>
+              </p>
+              <p><strong>Email:</strong> <span>info@example.com</span></p>
+            </div>
+          </div>
+
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Useful Links</h4>
+            <ul>
+              <li><i class="bi bi-chevron-right"></i> <a href="#">Home</a></li>
+              <li>
+                <i class="bi bi-chevron-right"></i> <a href="#">About us</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i> <a href="#">Services</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a href="#">Terms of service</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-2 col-md-3 footer-links">
+            <h4>Our Services</h4>
+            <ul>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a href="#services">Get Token Name</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a href="#services">Get Token Symbol</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a href="#services">Mint Tokens</a>
+              </li>
+              <li>
+                <i class="bi bi-chevron-right"></i>
+                <a href="#services">Transfer Token</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="col-lg-4 col-md-12">
+            <h4>Follow Us</h4>
+            <p>Follow us on below useful links</p>
+            <div class="social-links d-flex">
+              <a href=""><i class="bi bi-twitter-x"></i></a>
+              <a href=""><i class="bi bi-facebook"></i></a>
+              <a href=""><i class="bi bi-instagram"></i></a>
+              <a href=""><i class="bi bi-linkedin"></i></a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container copyright text-center mt-4">
+        <p>
+          © <span>Copyright</span>
+          <strong class="px-1 sitename">Forward Protocol</strong>
+          <span>All Rights Reserved</span>
+        </p>
+      </div>
+    </footer>
+
+    <!-- Scroll Top -->
+    <a
+      href="#"
+      id="scroll-top"
+      class="scroll-top d-flex align-items-center justify-content-center"
+      ><i class="bi bi-arrow-up-short"></i
+    ></a>
+
+    <!-- Preloader -->
+    <div id="preloader"></div>
+
+    <!-- Vendor JS Files -->
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.bundle.min.js"
+      integrity="sha512-7Pi/otdlbbCR+LnW+F7PwFcSDJOuUJB3OxtEHbg4vSMvzvJjde4Po1v4BR9Gdc9aXNUNFVUY+SK51wWT8WF0Gg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"
+      integrity="sha512-A7AYk1fGKX6S2SsHywmPkrnzTZHrgiVT7GcQkLGDe2ev0aWb8zejytzS8wjo7PGEXKqJOrjQ4oORtnimIRZBtw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/glightbox/3.3.1/js/glightbox.min.js"
+      integrity="sha512-XL54SjceXZFzblziNnaFFaXggzqCuZrFS4loWPpvPJ6Kg0kc2HyL89+cPeH0GMq0sKL2SegzUmA8Lx9a0st2ow=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/11.0.5/swiper-bundle.min.js"
+      integrity="sha512-Ysw1DcK1P+uYLqprEAzNQJP+J4hTx4t/3X2nbVwszao8wD+9afLjBQYjz7Uk4ADP+Er++mJoScI42ueGtQOzEA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/waypoints/4.0.1/noframework.waypoints.min.js"
+      integrity="sha512-fHXRw0CXruAoINU11+hgqYvY/PcsOWzmj0QmcSOtjlJcqITbPyypc8cYpidjPurWpCnlB8VKfRwx6PIpASCUkQ=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/5.0.0/imagesloaded.pkgd.min.js"
+      integrity="sha512-kfs3Dt9u9YcOiIt4rNcPUzdyNNO9sVGQPiZsub7ywg6lRW5KuK1m145ImrFHe3LMWXHndoKo2YRXWy8rnOcSKg=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js"
+      integrity="sha512-Zq2BOxyhvnRFXu0+WE6ojpZLOU2jdnqbrM1hmVdGzyeCa1DgM3X5Q4A/Is9xA1IkbUeDd7755dNNI/PzSf2Pew=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+    <script
+      src="https://cdnjs.cloudflare.com/ajax/libs/ethers/6.13.5/ethers.umd.min.js"
+      integrity="sha512-dj/EbePKIJrkhHMePgJ6ACP0v5whCZi+A8ot7WP+L0a3sPafqqWRiRhBBlGprs5hs5JjOYuTDlOic+qKc/s3mw=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    ></script>
+
+    <!-- Main JS File -->
+    <script>
+      (function () {
+        "use strict";
+
+        /**
+         * Apply .scrolled class to the body as the page is scrolled down
+         */
+        function toggleScrolled() {
+          const selectBody = document.querySelector("body");
+          const selectHeader = document.querySelector("#header");
+          if (
+            !selectHeader.classList.contains("scroll-up-sticky") &&
+            !selectHeader.classList.contains("sticky-top") &&
+            !selectHeader.classList.contains("fixed-top")
+          )
+            return;
+          window.scrollY > 100
+            ? selectBody.classList.add("scrolled")
+            : selectBody.classList.remove("scrolled");
+        }
+
+        document.addEventListener("scroll", toggleScrolled);
+        window.addEventListener("load", toggleScrolled);
+
+        /**
+         * Mobile nav toggle
+         */
+        const mobileNavToggleBtn = document.querySelector(".mobile-nav-toggle");
+
+        function mobileNavToogle() {
+          document.querySelector("body").classList.toggle("mobile-nav-active");
+          mobileNavToggleBtn.classList.toggle("bi-list");
+          mobileNavToggleBtn.classList.toggle("bi-x");
+        }
+        if (mobileNavToggleBtn) {
+          mobileNavToggleBtn.addEventListener("click", mobileNavToogle);
+        }
+
+        /**
+         * Hide mobile nav on same-page/hash links
+         */
+        document.querySelectorAll("#navmenu a").forEach((navmenu) => {
+          navmenu.addEventListener("click", () => {
+            if (document.querySelector(".mobile-nav-active")) {
+              mobileNavToogle();
+            }
+          });
+        });
+
+        /**
+         * Preloader
+         */
+        const preloader = document.querySelector("#preloader");
+        if (preloader) {
+          window.addEventListener("load", () => {
+            preloader.style.display = "none";
+          });
+        }
+
+        /**
+         * Scroll top button
+         */
+        let scrollTop = document.querySelector(".scroll-top");
+
+        function toggleScrollTop() {
+          if (scrollTop) {
+            window.scrollY > 100
+              ? scrollTop.classList.add("active")
+              : scrollTop.classList.remove("active");
+          }
+        }
+        scrollTop.addEventListener("click", (e) => {
+          e.preventDefault();
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        });
+
+        window.addEventListener("load", toggleScrollTop);
+        document.addEventListener("scroll", toggleScrollTop);
+
+        /**
+         * Animation on scroll function and init
+         */
+        function aosInit() {
+          AOS.init({
+            duration: 600,
+            easing: "ease-in-out",
+            once: true,
+            mirror: false,
+          });
+        }
+        window.addEventListener("load", aosInit);
+
+        /**
+         * Initiate glightbox
+         */
+        const glightbox = GLightbox({
+          selector: ".glightbox",
+        });
+
+        /**
+         * Init swiper sliders
+         */
+        function initSwiper() {
+          document
+            .querySelectorAll(".init-swiper")
+            .forEach(function (swiperElement) {
+              let config = JSON.parse(
+                swiperElement.querySelector(".swiper-config").innerHTML.trim()
+              );
+
+              if (swiperElement.classList.contains("swiper-tab")) {
+                initSwiperWithCustomPagination(swiperElement, config);
+              } else {
+                new Swiper(swiperElement, config);
+              }
+            });
+        }
+
+        window.addEventListener("load", initSwiper);
+
+        /**
+         * Animate the skills items on reveal
+         */
+        let skillsAnimation = document.querySelectorAll(".skills-animation");
+        skillsAnimation.forEach((item) => {
+          new Waypoint({
+            element: item,
+            offset: "80%",
+            handler: function (direction) {
+              let progress = item.querySelectorAll(".progress .progress-bar");
+              progress.forEach((el) => {
+                el.style.width = el.getAttribute("aria-valuenow") + "%";
+              });
+            },
+          });
+        });
+
+        /**
+         * Init isotope layout and filters
+         */
+        document
+          .querySelectorAll(".isotope-layout")
+          .forEach(function (isotopeItem) {
+            let layout = isotopeItem.getAttribute("data-layout") ?? "masonry";
+            let filter = isotopeItem.getAttribute("data-default-filter") ?? "*";
+            let sort =
+              isotopeItem.getAttribute("data-sort") ?? "original-order";
+
+            let initIsotope;
+            imagesLoaded(
+              isotopeItem.querySelector(".isotope-container"),
+              function () {
+                initIsotope = new Isotope(
+                  isotopeItem.querySelector(".isotope-container"),
+                  {
+                    itemSelector: ".isotope-item",
+                    layoutMode: layout,
+                    filter: filter,
+                    sortBy: sort,
+                  }
+                );
+              }
+            );
+
+            isotopeItem
+              .querySelectorAll(".isotope-filters li")
+              .forEach(function (filters) {
+                filters.addEventListener(
+                  "click",
+                  function () {
+                    isotopeItem
+                      .querySelector(".isotope-filters .filter-active")
+                      .classList.remove("filter-active");
+                    this.classList.add("filter-active");
+                    initIsotope.arrange({
+                      filter: this.getAttribute("data-filter"),
+                    });
+                    if (typeof aosInit === "function") {
+                      aosInit();
+                    }
+                  },
+                  false
+                );
+              });
+          });
+
+        /**
+         * Correct scrolling position upon page load for URLs containing hash links.
+         */
+        window.addEventListener("load", function (e) {
+          if (window.location.hash) {
+            if (document.querySelector(window.location.hash)) {
+              setTimeout(() => {
+                let section = document.querySelector(window.location.hash);
+                let scrollMarginTop = getComputedStyle(section).scrollMarginTop;
+                window.scrollTo({
+                  top: section.offsetTop - parseInt(scrollMarginTop),
+                  behavior: "smooth",
+                });
+              }, 100);
+            }
+          }
+        });
+
+        /**
+         * Navmenu Scrollspy
+         */
+        let navmenulinks = document.querySelectorAll(".navmenu a");
+
+        function navmenuScrollspy() {
+          navmenulinks.forEach((navmenulink) => {
+            if (!navmenulink.hash) return;
+            let section = document.querySelector(navmenulink.hash);
+            if (!section) return;
+            let position = window.scrollY + 200;
+            if (
+              position >= section.offsetTop &&
+              position <= section.offsetTop + section.offsetHeight
+            ) {
+              document
+                .querySelectorAll(".navmenu a.active")
+                .forEach((link) => link.classList.remove("active"));
+              navmenulink.classList.add("active");
+            } else {
+              navmenulink.classList.remove("active");
+            }
+          });
+        }
+        window.addEventListener("load", navmenuScrollspy);
+        document.addEventListener("scroll", navmenuScrollspy);
+      })();
+    </script>
+    <script>
+      const API_BASE_URL = "https://test.forwardfactory.ai/api";
+      const USERWEBAPP_FRONTEND_URL = `${API_BASE_URL}/network/userwebapp/frontend/`;
+      const CONTRACT_EXECUTE_URL = `${API_BASE_URL}/contract/execute/`;
+
+      const fetchAppData = async (subdomain) => {
+        const response = await fetch(USERWEBAPP_FRONTEND_URL + subdomain);
+        if (!response.ok) {
+          throw new Error(`Failed to fetch app data: ${response.statusText}`);
+        }
+        return await response.json();
+      };
+
+      const executeContractFunction = async (appId, functionName) => {
+        const response = await fetch(CONTRACT_EXECUTE_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            application_uuid: appId,
+            function_name: functionName,
+            parsed_params: [],
+          }),
+        });
+        if (!response.ok) {
+          throw new Error(
+            `Failed to execute contract function: ${response.statusText}`
+          );
+        }
+        return await response.json();
+      };
+
+      const onRead = async (index, target) => {
+        const preloader = document.querySelector("#preloader");
+        try {
+          if (preloader) {
+            preloader.style.display = "block";
+          }
+          const app = await fetchAppData(subdomain);
+
+          if (app.adminAppId) {
+            const result = await executeContractFunction(
+              app.adminAppId,
+              app.contractAbi[index].name
+            ); // index of function in contractAbi
+            document.getElementById(target).innerHTML = result.result;
+          } else {
+            window.parent.postMessage("Invalid application data: " + app, "*");
+          }
+          if (preloader) {
+            preloader.style.display = "none";
+          }
+        } catch (error) {
+          window.parent.postMessage("ERROR OCCURRED: " + error, "*");
+          if (preloader) {
+            preloader.style.display = "none";
+          }
+        }
+      };
+
+      const onWrite = async (index, result, param1 = "", param2 = "") => {
+        const preloader = document.querySelector("#preloader");
+        try {
+          if (preloader) {
+            preloader.style.display = "block";
+          }
+
+          if (!window.ethereum) {
+            alert("Please install MetaMask!");
+            throw Error("Metamask not installed");
+          }
+
+          const app = await fetchAppData(subdomain);
+
+          if (app.adminAppId) {
+            // Connect to MetaMask
+            await window.ethereum.request({ method: "eth_requestAccounts" });
+
+            const provider = new ethers.BrowserProvider(window.ethereum);
+            provider.on("network", (newNetwork, oldNetwork) => {
+              // When a Provider makes its initial connection, it emits a "network"
+              // event with a null oldNetwork along with the newNetwork. So, if the
+              // oldNetwork exists, it represents a changing network
+              if (oldNetwork) {
+                window.location.reload();
+              }
+            });
+            const signer = await provider.getSigner();
+
+            // Initialize contract
+            const contract = new ethers.Contract(
+              app.contractAddress,
+              app.contractAbi,
+              signer
+            );
+
+            const functionName = app.contractAbi[index].name;
+            let tx;
+            if (app.contractAbi[index].inputs.length === 1) {
+              const val1 = document.getElementById(param1).value;
+              tx = await contract[functionName](val1);
+            } else if (app.contractAbi[index].inputs.length === 2) {
+              const val1 = document.getElementById(param1).value;
+              const val2 = document.getElementById(param2).value;
+              tx = await contract[functionName](val1, val2);
+            }
+
+            await tx.wait();
+
+            document.getElementById(result).innerHTML = tx.hash;
+          } else {
+            window.parent.postMessage("Invalid application data: " + app, "*");
+          }
+          if (preloader) {
+            preloader.style.display = "none";
+          }
+        } catch (error) {
+          window.parent.postMessage("ERROR OCCURRED: " + error, "*");
+          if (preloader) {
+            preloader.style.display = "none";
+          }
+        }
+      };
+    </script>
+  </body>
+</html>
