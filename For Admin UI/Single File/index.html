@@ -1857,11 +1857,11 @@
     </script>
     <script>
       const API_BASE_URL = "https://test.forwardfactory.ai/api";
-      const USERWEBAPP_FRONTEND_URL = `${API_BASE_URL}/network/userwebapp/admin/`;
+      const USERWEBAPP_ADMIN_URL = `${API_BASE_URL}/network/userwebapp/admin/`;
       const CONTRACT_EXECUTE_URL = `${API_BASE_URL}/contract/execute/`;
 
       const fetchAppData = async (applicationID) => {
-        const response = await fetch(USERWEBAPP_FRONTEND_URL + applicationID);
+        const response = await fetch(USERWEBAPP_ADMIN_URL + applicationID);
         if (!response.ok) {
           throw new Error(`Failed to fetch app data: ${response.statusText}`);
         }

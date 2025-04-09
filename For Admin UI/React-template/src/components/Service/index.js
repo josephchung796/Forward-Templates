@@ -12,7 +12,7 @@ import TransferService from "./TransferService";
 import { executeContractFunction, fetchAppData } from "../../lib/utils";
 
 const Service = () => {
-  const [subdomain, setSubdomain] = useState("");
+  const [applicationID, setApplicationID] = useState("");
   const [tokenName, setTokenName] = useState(
     "Token name will be displayed here"
   );
@@ -34,8 +34,8 @@ const Service = () => {
     GLightbox({ selector: ".glightbox" });
 
     window.addEventListener("message", (event) => {
-      if (event.data.type === "urlData") {
-        setSubdomain(event.data.payload);
+      if (event.data.type === "applicationID") {
+        setApplicationID(event.data.payload);
       }
     });
 
@@ -49,7 +49,7 @@ const Service = () => {
 
   const handleRead = async (index, setter) => {
     try {
-      const app = await fetchAppData(subdomain);
+      const app = await fetchAppData(applicationID);
       if (app.adminAppId) {
         const result = await executeContractFunction(
           app.adminAppId,
@@ -66,7 +66,7 @@ const Service = () => {
     try {
       if (!window.ethereum) throw new Error("Please install MetaMask!");
 
-      const app = await fetchAppData(subdomain);
+      const app = await fetchAppData(applicationID);
       if (!app.adminAppId) throw new Error("Invalid application data");
 
       await window.ethereum.request({ method: "eth_requestAccounts" });

@@ -1,10 +1,10 @@
-let subdomain = "";
+let applicationID = "";
 window.addEventListener("message", (event) => {
   // Verify the parent's origin for security
   window.parent.postMessage(event.origin, "*");
 
-  if (event.data.type === "urlData") {
-    subdomain = event.data.payload;
+  if (event.data.type === "applicationID") {
+    applicationID = event.data.payload;
     window.parent.postMessage("Received:" + event.data.payload, "*");
   }
 });
@@ -236,11 +236,11 @@ window.addEventListener("message", (event) => {
 })();
 
 const API_BASE_URL = "https://test.forwardfactory.ai/api";
-const USERWEBAPP_FRONTEND_URL = `${API_BASE_URL}/network/userwebapp/frontend/`;
+const USERWEBAPP_ADMIN_URL = `${API_BASE_URL}/network/userwebapp/admin/`;
 const CONTRACT_EXECUTE_URL = `${API_BASE_URL}/contract/execute/`;
 
-const fetchAppData = async (subdomain) => {
-  const response = await fetch(USERWEBAPP_FRONTEND_URL + subdomain);
+const fetchAppData = async (applicationID) => {
+  const response = await fetch(USERWEBAPP_ADMIN_URL + applicationID);
   if (!response.ok) {
     throw new Error(`Failed to fetch app data: ${response.statusText}`);
   }
@@ -273,7 +273,7 @@ const onRead = async (index, target) => {
     if (preloader) {
       preloader.style.display = "block";
     }
-    const app = await fetchAppData(subdomain);
+    const app = await fetchAppData(applicationID);
 
     if (app.adminAppId) {
       const result = await executeContractFunction(
@@ -307,7 +307,7 @@ const onWrite = async (index, result, param1 = "", param2 = "") => {
       throw Error("Metamask not installed");
     }
 
-    const app = await fetchAppData(subdomain);
+    const app = await fetchAppData(applicationID);
 
     if (app.adminAppId) {
       // Connect to MetaMask

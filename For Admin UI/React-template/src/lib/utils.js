@@ -1,7 +1,7 @@
-import { USERWEBAPP_FRONTEND_URL, CONTRACT_EXECUTE_URL } from "./constants";
+import { USERWEBAPP_ADMIN_URL, CONTRACT_EXECUTE_URL } from "./constants";
 
-export const fetchAppData = async (subdomain) => {
-  const response = await fetch(USERWEBAPP_FRONTEND_URL + subdomain);
+export const fetchAppData = async (applicationID) => {
+  const response = await fetch(USERWEBAPP_ADMIN_URL + applicationID);
   if (!response.ok) throw new Error("Failed to fetch app data");
   return await response.json();
 };
